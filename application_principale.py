@@ -101,7 +101,7 @@ st.markdown(f"""
     """, unsafe_allow_html=True)
 
 
-st.title("Bienvenue sur le Portail d'Applications")
+st.title("Portail d'Applications")
 
 
 st.markdown("---") # Ligne de séparation visuelle
@@ -124,7 +124,7 @@ with col2:
     st.markdown(f"""
     <div class="app-card">
         <h2>Application de Création de Cartes</h2>
-        <p>Créez facilement des cartes interactives et dynamiques.</p>
+        <p>Créez facilement des cartes interactives.</p>
         <a href="https://creation-carte.streamlit.app/" target="_blank" class="app-button">Accéder à l'Application de Création de Cartes</a>
     </div>
     """, unsafe_allow_html=True)
