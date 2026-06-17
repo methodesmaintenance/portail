@@ -228,7 +228,7 @@ st.markdown(f"""
     <div class="logo-container">
         {img_tag}
     </div>
-    <div class="main-header">Portail d'Applications Clévia</div>
+    <div class="main-header">Portail d'Applications</div>
 """, unsafe_allow_html=True)
 
 st.markdown("<hr>", unsafe_allow_html=True)
