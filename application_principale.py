@@ -181,7 +181,7 @@ st.markdown(f"""
 
     .tooltip-text {{
         visibility: hidden;
-        width: 320px;
+        width: 300px;
         background-color: {EIFFAGE_BLACK};
         color: #ffffff;
         text-align: left;
@@ -189,7 +189,7 @@ st.markdown(f"""
         padding: 15px 20px;
         position: absolute;
         z-index: 9999; 
-        bottom: 135%; 
+        top: 135%; 
         right: 0; 
         opacity: 0;
         transition: opacity 0.2s, bottom 0.2s;
