@@ -108,6 +108,7 @@ st.markdown(f"""
         color: white;
     }}
 
+    /* MODIFICATION ICI : L'info-bulle apparaît AU-DESSUS de l'icône pour éviter la superposition */
     .tooltip-text {{
         visibility: hidden;
         width: 340px;
@@ -117,12 +118,12 @@ st.markdown(f"""
         border-radius: 10px;
         padding: 15px 20px;
         position: absolute;
-        z-index: 1000;
-        top: 130%; 
-        right: 0; /* Aligné sur la droite pour ne pas sortir de l'écran */
+        z-index: 9999; /* Forcé au premier plan */
+        bottom: 135%; /* Apparait au dessus */
+        right: 0; 
         opacity: 0;
-        transition: opacity 0.2s, top 0.2s;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        transition: opacity 0.2s, bottom 0.2s;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         font-size: 0.9em;
         line-height: 1.5;
         font-weight: 400;
@@ -131,7 +132,19 @@ st.markdown(f"""
     .info-container:hover .tooltip-text {{
         visibility: visible;
         opacity: 1;
-        top: 110%;
+        bottom: 120%; /* Glisse légèrement vers le bas en apparaissant */
+    }}
+
+    /* Petite flèche sous l'info-bulle */
+    .tooltip-text::after {{
+        content: "";
+        position: absolute;
+        top: 100%;
+        right: 10px;
+        margin-left: -5px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: {EIFFAGE_BLUE} transparent transparent transparent;
     }}
 
     .tooltip-text ul, .tooltip-text ol {{
@@ -141,7 +154,7 @@ st.markdown(f"""
     }}
 
     .tooltip-text a {{
-        color: #82C0E7; /* Bleu clair pour les liens sur fond foncé */
+        color: #82C0E7;
         text-decoration: none;
         font-weight: 600;
     }}
@@ -199,22 +212,18 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # 4. En-tête avec Logo et Titre
-# Fonction pour lire l'image locale et l'intégrer proprement dans le HTML
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 
-# Nom de votre fichier image (doit être dans le même dossier que ce script Python)
 image_filename = "Eiffage_Énergie_Systèmes.svg (2).png"
 
 try:
     img_base64 = get_base64_image(image_filename)
     img_tag = f'<img src="data:image/png;base64,{img_base64}" width="250" alt="Logo Eiffage">'
 except FileNotFoundError:
-    # Message d'erreur discret si le fichier n'est pas trouvé
     img_tag = f'<p style="color:#E63312;">⚠️ Image "{image_filename}" introuvable.</p>'
 
-# Affichage avec le CSS pré-configuré
 st.markdown(f"""
     <div class="logo-container">
         {img_tag}
@@ -222,7 +231,9 @@ st.markdown(f"""
     <div class="main-header">Portail d'Applications Clévia</div>
 """, unsafe_allow_html=True)
 
-# 5. Cartes d'applications (Ligne 1)
+st.markdown("<hr>", unsafe_allow_html=True)
+
+# 5. LIGNE 1 : Les deux applications OptiRout'EES
 col1, col2 = st.columns(2)
 
 with col1:
@@ -249,6 +260,36 @@ with col2:
     st.markdown(f"""
     <div class="app-card">
         <div class="app-card-header">
+            <h2>OptiRout'EES <br><span style="font-size: 0.8em; color: {EIFFAGE_RED};">Outil Général</span></h2>
+            <div class="info-container">
+                <div class="info-icon">i</div>
+                <div class="tooltip-text">
+                    <strong>L'optimisation sur-mesure pour tous contrats</strong><br><br>
+                    Démarche d'utilisation :
+                    <ol>
+                        <li>Remplissez le gabarit Excel type fourni.</li>
+                        <li>Obtenez vos coordonnées GPS et calculez votre matrice (via l'outil OSRM).</li>
+                        <li>Importez votre dossier complet pour générer vos tournées optimisées.</li>
+                    </ol>
+                    <em>⚠️ Nécessite un accès au réseau interne Eiffage (lien local).</em><br><br>
+                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contactez le support</a>
+                </div>
+            </div>
+        </div>
+        <p class="description">La solution universelle pour optimiser les itinéraires de vos équipes, quel que soit le contrat, l'agence ou le secteur d'activité visé.</p>
+        <a href="http://172.17.38.0:8502/" target="_blank" class="app-button">Accéder à OptiRout'EES (Général)</a>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# 6. LIGNE 2 : Générateur de cartes et Matrice OSRM
+col3, col4 = st.columns(2)
+
+with col3:
+    st.markdown(f"""
+    <div class="app-card">
+        <div class="app-card-header">
             <h2>Générateur de Cartes & Sectorisation</h2>
             <div class="info-container">
                 <div class="info-icon">i</div>
@@ -270,12 +311,7 @@ with col2:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_allow_html=True)
-
-# 6. Cartes d'applications (Ligne 2)
-col3, col4 = st.columns(2)
-
-with col3:
+with col4:
     st.markdown(f"""
     <div class="app-card">
         <div class="app-card-header">
@@ -292,31 +328,6 @@ with col3:
         </div>
         <p class="description">Outil fondamental de planification : calculez instantanément les temps de parcours réels entre plusieurs centaines de points d'intervention en France.</p>
         <a href="http://172.17.38.0:8503/" target="_blank" class="app-button">Accéder au Calculateur de Temps</a>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col4:
-    st.markdown(f"""
-    <div class="app-card">
-        <div class="app-card-header">
-            <h2>OptiRout'EES <br><span style="font-size: 0.8em; color: {EIFFAGE_RED};">Outil Général</span></h2>
-            <div class="info-container">
-                <div class="info-icon">i</div>
-                <div class="tooltip-text">
-                    <strong>L'optimisation sur-mesure pour tous contrats</strong><br><br>
-                    Démarche d'utilisation :
-                    <ol>
-                        <li>Remplissez le gabarit Excel type fourni.</li>
-                        <li>Obtenez vos coordonnées GPS et calculez votre matrice (via l'outil OSRM).</li>
-                        <li>Importez votre dossier complet pour générer vos tournées optimisées.</li>
-                    </ol>
-                    <em>⚠️ Nécessite un accès au réseau interne Eiffage (lien local).</em><br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contactez le support</a>
-                </div>
-            </div>
-        </div>
-        <p class="description">La solution universelle pour optimiser les itinéraires de vos équipes, quel que soit le contrat, l'agence ou le secteur d'activité visé.</p>
-        <a href="http://172.17.38.0:8502/" target="_blank" class="app-button">Accéder à OptiRout'EES (Général)</a>
     </div>
     """, unsafe_allow_html=True)
 
