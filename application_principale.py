@@ -8,12 +8,12 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. Définition de la charte graphique (Clévia / Eiffage)
-EIFFAGE_BLUE = "#003B5C"     # Bleu profond Eiffage/Clévia
-EIFFAGE_RED = "#E63312"      # Rouge/Orange dynamique Eiffage
-BG_COLOR = "#F4F7F9"         # Gris-bleu très clair pour le fond
-TEXT_COLOR = "#2C3E50"       # Gris anthracite pour une lecture douce
-CARD_BG = "#FFFFFF"          # Fond des cartes
+# 2. Définition de la charte graphique officielle EIFFAGE
+EIFFAGE_BLACK = "#111111"    # Noir pur / Anthracite principal Eiffage
+EIFFAGE_RED = "#E63312"      # Rouge dynamique Eiffage
+BG_COLOR = "#F8F9FA"         # Gris très clair pour le fond de page
+TEXT_COLOR = "#2A2A2A"       # Gris sombre textuel pour le confort visuel
+CARD_BG = "#FFFFFF"          # Blanc pour les cartes d'application
 
 # 3. Injection du CSS personnalisé
 st.markdown(f"""
@@ -27,7 +27,7 @@ st.markdown(f"""
 
     /* En-tête principal */
     .main-header {{
-        color: {EIFFAGE_BLUE};
+        color: {EIFFAGE_BLACK};
         text-align: center;
         font-size: 2.8em;
         font-weight: 800;
@@ -36,11 +36,11 @@ st.markdown(f"""
         letter-spacing: -0.5px;
     }}
 
-    /* Séparateur stylisé */
+    /* Séparateur stylisé aux couleurs Eiffage */
     hr {{
         border: 0;
         height: 1px;
-        background-image: linear-gradient(to right, rgba(0, 59, 92, 0), rgba(0, 59, 92, 0.2), rgba(0, 59, 92, 0));
+        background-image: linear-gradient(to right, rgba(230, 51, 18, 0), rgba(230, 51, 18, 0.4), rgba(230, 51, 18, 0));
         margin: 40px 0;
     }}
 
@@ -48,7 +48,7 @@ st.markdown(f"""
     .app-card {{
         background-color: {CARD_BG}; 
         border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); 
         padding: 30px;
         margin-bottom: 25px; 
         transition: all 0.3s ease; 
@@ -56,11 +56,11 @@ st.markdown(f"""
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border: 1px solid rgba(0,0,0,0.03);
+        border: 1px solid rgba(0,0,0,0.02);
     }}
     .app-card:hover {{
         transform: translateY(-5px);
-        box-shadow: 0 12px 30px rgba(0, 59, 92, 0.1); 
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); 
         border-bottom: 4px solid {EIFFAGE_RED};
     }}
 
@@ -73,7 +73,7 @@ st.markdown(f"""
     }}
 
     .app-card-header h2 {{
-        color: {EIFFAGE_BLUE}; 
+        color: {EIFFAGE_BLACK}; 
         font-size: 1.5em;
         font-weight: 700;
         margin: 0; 
@@ -89,7 +89,7 @@ st.markdown(f"""
 
     .info-icon {{
         cursor: pointer;
-        color: {EIFFAGE_BLUE};
+        color: {EIFFAGE_BLACK};
         background-color: {BG_COLOR};
         border-radius: 50%;
         min-width: 28px; 
@@ -100,26 +100,26 @@ st.markdown(f"""
         font-weight: bold;
         font-size: 0.9em;
         transition: all 0.2s ease;
-        border: 1px solid rgba(0, 59, 92, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.08);
     }}
 
     .info-icon:hover {{
-        background-color: {EIFFAGE_BLUE};
+        background-color: {EIFFAGE_BLACK};
         color: white;
     }}
 
-    /* MODIFICATION ICI : L'info-bulle apparaît AU-DESSUS de l'icône pour éviter la superposition */
+    /* Position de l'info-bulle ajustée AU-DESSUS pour éviter les superpositions */
     .tooltip-text {{
         visibility: hidden;
         width: 340px;
-        background-color: {EIFFAGE_BLUE};
+        background-color: {EIFFAGE_BLACK};
         color: #ffffff;
         text-align: left;
         border-radius: 10px;
         padding: 15px 20px;
         position: absolute;
-        z-index: 9999; /* Forcé au premier plan */
-        bottom: 135%; /* Apparait au dessus */
+        z-index: 9999; 
+        bottom: 135%; 
         right: 0; 
         opacity: 0;
         transition: opacity 0.2s, bottom 0.2s;
@@ -132,7 +132,7 @@ st.markdown(f"""
     .info-container:hover .tooltip-text {{
         visibility: visible;
         opacity: 1;
-        bottom: 120%; /* Glisse légèrement vers le bas en apparaissant */
+        bottom: 120%; 
     }}
 
     /* Petite flèche sous l'info-bulle */
@@ -144,7 +144,7 @@ st.markdown(f"""
         margin-left: -5px;
         border-width: 6px;
         border-style: solid;
-        border-color: {EIFFAGE_BLUE} transparent transparent transparent;
+        border-color: {EIFFAGE_BLACK} transparent transparent transparent;
     }}
 
     .tooltip-text ul, .tooltip-text ol {{
@@ -154,7 +154,7 @@ st.markdown(f"""
     }}
 
     .tooltip-text a {{
-        color: #82C0E7;
+        color: #FF6B57; /* Rouge/Orange clair pour les liens sur fond noir */
         text-decoration: none;
         font-weight: 600;
     }}
@@ -184,7 +184,7 @@ st.markdown(f"""
         width: 100%; 
     }}
     .app-button:hover {{
-        background-color: {EIFFAGE_BLUE};
+        background-color: {EIFFAGE_BLACK};
         transform: scale(1.02);
     }}
 
@@ -195,10 +195,10 @@ st.markdown(f"""
         padding-top: 30px;
         border-top: 1px solid rgba(0,0,0,0.05);
         font-size: 0.95em;
-        color: #5C6F82;
+        color: #555555;
     }}
     .footer-container a {{
-        color: {EIFFAGE_BLUE};
+        color: {EIFFAGE_RED};
         text-decoration: none;
         font-weight: bold;
     }}
@@ -222,7 +222,7 @@ try:
     img_base64 = get_base64_image(image_filename)
     img_tag = f'<img src="data:image/png;base64,{img_base64}" width="250" alt="Logo Eiffage">'
 except FileNotFoundError:
-    img_tag = f'<p style="color:#E63312;">⚠️ Image "{image_filename}" introuvable.</p>'
+    img_tag = f'<p style="color:{EIFFAGE_RED};">⚠️ Image "{image_filename}" introuvable.</p>'
 
 st.markdown(f"""
     <div class="logo-container">
@@ -233,7 +233,7 @@ st.markdown(f"""
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
-# 5. LIGNE 1 : Les deux applications OptiRout'EES
+# 5. LIGNE 1 : Les deux applications OptiRout'EES regroupées
 col1, col2 = st.columns(2)
 
 with col1:
@@ -283,7 +283,7 @@ with col2:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# 6. LIGNE 2 : Générateur de cartes et Matrice OSRM
+# 6. LIGNE 2 : Outils transverses (Cartes et OSRM)
 col3, col4 = st.columns(2)
 
 with col3:
@@ -332,7 +332,7 @@ with col4:
     """, unsafe_allow_html=True)
 
 # 7. Pied de page
-st.markdown("""
+st.markdown(f"""
     <div class="footer-container">
         Développé pour <strong>Eiffage Énergie Systèmes - Clévia</strong><br>
         Pour toute assistance technique, méthode ou évolution, contactez le service : <br>
