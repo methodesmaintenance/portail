@@ -8,12 +8,14 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. Définition de la charte graphique officielle EIFFAGE
+# 2. Définition de la charte graphique officielle EIFFAGE & Couleurs modernes
 EIFFAGE_BLACK = "#111111"    # Noir pur / Anthracite principal Eiffage
 EIFFAGE_RED = "#E63312"      # Rouge dynamique Eiffage
-BG_COLOR = "#F8F9FA"         # Gris très clair pour le fond de page
-TEXT_COLOR = "#2A2A2A"       # Gris sombre textuel pour le confort visuel
-CARD_BG = "#FFFFFF"          # Blanc pour les cartes d'application
+BG_COLOR = "#F4F7F6"         # Gris très clair et moderne pour le fond
+TEXT_COLOR = "#333333"       # Gris sombre textuel
+CARD_BG = "#FFFFFF"          # Blanc pur pour les cartes
+CLOUD_COLOR = "#007BFF"      # Bleu pour indiquer le Cloud
+LOCAL_COLOR = "#F39C12"      # Orange pour indiquer le Local
 
 # 3. Injection du CSS personnalisé
 st.markdown(f"""
@@ -21,48 +23,109 @@ st.markdown(f"""
     /* Configuration globale */
     .stApp {{
         background-color: {BG_COLOR};
-        color: {TEXT_COLOR};
         font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }}
 
-    /* En-tête principal */
-    .main-header {{
-        color: {EIFFAGE_BLACK};
-        text-align: center;
-        font-size: 2.8em;
-        font-weight: 800;
+    /* Container de l'en-tête (Flexbox pour aligner à gauche et à droite) */
+    .header-container {{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-top: 10px;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        flex-wrap: wrap;
+        gap: 20px;
+    }}
+
+    /* Section Gauche : Logo et Titre */
+    .header-left {{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }}
+
+    .main-title {{
+        color: {EIFFAGE_BLACK};
+        font-size: 2.4em;
+        font-weight: 800;
         letter-spacing: -0.5px;
+        margin-top: 15px;
     }}
 
-    /* Séparateur stylisé aux couleurs Eiffage */
-    hr {{
-        border: 0;
-        height: 1px;
-        background-image: linear-gradient(to right, rgba(230, 51, 18, 0), rgba(230, 51, 18, 0.4), rgba(230, 51, 18, 0));
-        margin: 40px 0;
+    /* Section Droite : Légende d'accès */
+    .header-right {{
+        background: #FFFFFF;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        border: 1px solid rgba(0,0,0,0.05);
+        font-size: 0.9em;
+        color: {TEXT_COLOR};
+        max-width: 400px;
+    }}
+    
+    .legend-title {{
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: {EIFFAGE_BLACK};
+        border-bottom: 2px solid {BG_COLOR};
+        padding-bottom: 5px;
     }}
 
-    /* Design des Cartes d'application */
+    .legend-item {{
+        margin-bottom: 6px;
+        line-height: 1.4;
+    }}
+
+    /* Badges Local / Cloud */
+    .badge {{
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.75em;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+    }}
+    .badge-local {{ background-color: {LOCAL_COLOR}; }}
+    .badge-cloud {{ background-color: {CLOUD_COLOR}; }}
+    .badge-inline {{ margin-bottom: 0; margin-right: 8px; }}
+
+    /* Design des Cartes d'application modernisées */
     .app-card {{
         background-color: {CARD_BG}; 
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); 
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04); 
         padding: 30px;
         margin-bottom: 25px; 
-        transition: all 0.3s ease; 
+        transition: transform 0.3s ease, box-shadow 0.3s ease; 
         height: 100%; 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border: 1px solid rgba(0,0,0,0.02);
+        border: 1px solid rgba(0,0,0,0.03);
+        position: relative;
     }}
     .app-card:hover {{
         transform: translateY(-5px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); 
-        border-bottom: 4px solid {EIFFAGE_RED};
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); 
     }}
+    
+    /* Bordure supérieure de couleur au survol */
+    .app-card::before {{
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 4px;
+        background: {EIFFAGE_RED};
+        border-radius: 16px 16px 0 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }}
+    .app-card:hover::before {{ opacity: 1; }}
 
     /* En-tête de la carte */
     .app-card-header {{
@@ -74,11 +137,20 @@ st.markdown(f"""
 
     .app-card-header h2 {{
         color: {EIFFAGE_BLACK}; 
-        font-size: 1.5em;
+        font-size: 1.4em;
         font-weight: 700;
         margin: 0; 
         line-height: 1.3;
         padding-right: 15px;
+    }}
+    
+    .subtitle {{
+        font-size: 0.85em; 
+        color: {EIFFAGE_RED};
+        font-weight: 600;
+        text-transform: uppercase;
+        display: block;
+        margin-top: 5px;
     }}
 
     /* Icône d'information et Tooltip */
@@ -89,18 +161,17 @@ st.markdown(f"""
 
     .info-icon {{
         cursor: pointer;
-        color: {EIFFAGE_BLACK};
+        color: #A0A0A0;
         background-color: {BG_COLOR};
         border-radius: 50%;
-        min-width: 28px; 
-        height: 28px;
+        min-width: 32px; 
+        height: 32px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: bold;
-        font-size: 0.9em;
+        font-size: 1em;
         transition: all 0.2s ease;
-        border: 1px solid rgba(0, 0, 0, 0.08);
     }}
 
     .info-icon:hover {{
@@ -108,14 +179,13 @@ st.markdown(f"""
         color: white;
     }}
 
-    /* Position de l'info-bulle ajustée AU-DESSUS pour éviter les superpositions */
     .tooltip-text {{
         visibility: hidden;
-        width: 340px;
+        width: 320px;
         background-color: {EIFFAGE_BLACK};
         color: #ffffff;
         text-align: left;
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 15px 20px;
         position: absolute;
         z-index: 9999; 
@@ -123,7 +193,7 @@ st.markdown(f"""
         right: 0; 
         opacity: 0;
         transition: opacity 0.2s, bottom 0.2s;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         font-size: 0.9em;
         line-height: 1.5;
         font-weight: 400;
@@ -132,15 +202,14 @@ st.markdown(f"""
     .info-container:hover .tooltip-text {{
         visibility: visible;
         opacity: 1;
-        bottom: 120%; 
+        bottom: 125%; 
     }}
 
-    /* Petite flèche sous l'info-bulle */
     .tooltip-text::after {{
         content: "";
         position: absolute;
         top: 100%;
-        right: 10px;
+        right: 12px;
         margin-left: -5px;
         border-width: 6px;
         border-style: solid;
@@ -148,13 +217,13 @@ st.markdown(f"""
     }}
 
     .tooltip-text ul, .tooltip-text ol {{
-        margin-top: 5px;
+        margin-top: 8px;
         margin-bottom: 10px;
         padding-left: 20px;
     }}
 
     .tooltip-text a {{
-        color: #FF6B57; /* Rouge/Orange clair pour les liens sur fond noir */
+        color: #FF8E7D;
         text-decoration: none;
         font-weight: 600;
     }}
@@ -163,29 +232,33 @@ st.markdown(f"""
     /* Texte de description de la carte */
     .app-card p.description {{
         flex-grow: 1; 
-        font-size: 1.05em;
+        font-size: 1em;
         color: {TEXT_COLOR};
         line-height: 1.6;
         margin-bottom: 25px;
+        opacity: 0.85;
     }}
 
-    /* Boutons d'action */
+    /* Boutons d'action modernisés */
     .app-button {{
-        display: block; 
+        display: flex; 
+        justify-content: center;
+        align-items: center;
         padding: 14px 20px;
         background-color: {EIFFAGE_RED}; 
         color: #ffffff !important;
-        text-align: center;
         text-decoration: none;
         font-size: 1em;
         font-weight: 600;
-        border-radius: 6px;
-        transition: background-color 0.3s, transform 0.1s; 
+        border-radius: 8px;
+        transition: all 0.3s ease; 
         width: 100%; 
+        border: none;
     }}
     .app-button:hover {{
         background-color: {EIFFAGE_BLACK};
-        transform: scale(1.02);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }}
 
     /* Pied de page */
@@ -194,8 +267,8 @@ st.markdown(f"""
         margin-top: 60px;
         padding-top: 30px;
         border-top: 1px solid rgba(0,0,0,0.05);
-        font-size: 0.95em;
-        color: #555555;
+        font-size: 0.9em;
+        color: #777777;
     }}
     .footer-container a {{
         color: {EIFFAGE_RED};
@@ -203,15 +276,10 @@ st.markdown(f"""
         font-weight: bold;
     }}
     .footer-container a:hover {{ text-decoration: underline; }}
-    
-    .logo-container {{
-        text-align: center;
-        margin-bottom: 10px;
-    }}
     </style>
 """, unsafe_allow_html=True)
 
-# 4. En-tête avec Logo et Titre
+# 4. En-tête avec Logo, Titre et Légende d'accès
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
@@ -220,38 +288,52 @@ image_filename = "Eiffage_Énergie_Systèmes.svg (2).png"
 
 try:
     img_base64 = get_base64_image(image_filename)
-    img_tag = f'<img src="data:image/png;base64,{img_base64}" width="250" alt="Logo Eiffage">'
+    img_tag = f'<img src="data:image/png;base64,{img_base64}" width="220" alt="Logo Eiffage">'
 except FileNotFoundError:
-    img_tag = f'<p style="color:{EIFFAGE_RED};">⚠️ Image "{image_filename}" introuvable.</p>'
+    img_tag = f'<p style="color:{EIFFAGE_RED}; font-weight:bold;">⚠️ Image introuvable</p>'
 
 st.markdown(f"""
-    <div class="logo-container">
-        {img_tag}
+    <div class="header-container">
+        <div class="header-left">
+            {img_tag}
+            <div class="main-title">Portail d'Applications</div>
+        </div>
+        <div class="header-right">
+            <div class="legend-title">Informations d'accès</div>
+            <div class="legend-item">
+                <span class="badge badge-local badge-inline">🔒 Local</span> 
+                Accessible uniquement sur le réseau Eiffage (bureau en Wi-Fi/câble ou VPN). Inaccessible en télétravail direct.
+            </div>
+            <div class="legend-item" style="margin-top: 10px;">
+                <span class="badge badge-cloud badge-inline">☁️ Cloud</span> 
+                Accessible de n'importe où, même depuis un ordinateur ou téléphone personnel.
+            </div>
+        </div>
     </div>
-    <div class="main-header">Portail d'Applications</div>
 """, unsafe_allow_html=True)
 
-st.markdown("<hr>", unsafe_allow_html=True)
 
-# 5. LIGNE 1 : Les deux applications OptiRout'EES regroupées
+# 5. LIGNE 1 : Les deux applications OptiRout'EES
 col1, col2 = st.columns(2)
 
 with col1:
     st.markdown(f"""
     <div class="app-card">
         <div class="app-card-header">
-            <h2>OptiRout'EES <br><span style="font-size: 0.8em; color: {EIFFAGE_RED};">La Poste Immobilier</span></h2>
+            <div>
+                <span class="badge badge-local">🔒 Local</span>
+                <h2>OptiRout'EES <span class="subtitle">Contrat La Poste Immobilier</span></h2>
+            </div>
             <div class="info-container">
-                <div class="info-icon">i</div>
+                <div class="info-icon">?</div>
                 <div class="tooltip-text">
-                    <strong>Contrat LPI - Optimisation des tournées</strong><br><br>
-                    Application connectée directement au fichier de suivi PEC. Elle intègre automatiquement les horaires mis à jour pour plus de 500 sites afin de générer les itinéraires de maintenance les plus efficaces.<br><br>
-                    <em>⚠️ Nécessite un accès au réseau interne Eiffage (lien local).</em><br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contactez le support</a>
+                    <strong>Optimisation des tournées - LPI</strong><br><br>
+                    Application connectée en temps réel au fichier de suivi Prise en Charge (PEC). Elle intègre automatiquement les mises à jour Excel et génère les itinéraires de maintenance les plus performants pour plus de 500 sites.<br><br>
+                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contacter le support</a>
                 </div>
             </div>
         </div>
-        <p class="description">Générez et optimisez les tournées de vos techniciens spécifiquement pour le contrat La Poste Immobilier, avec synchronisation dynamique des données PEC.</p>
+        <p class="description">Générez et optimisez les tournées de vos techniciens avec une synchronisation dynamique des données PEC, un outil pensé sur-mesure pour le contrat LPI.</p>
         <a href="http://172.17.38.0:8501/" target="_blank" class="app-button">Accéder à OptiRout'EES (LPI)</a>
     </div>
     """, unsafe_allow_html=True)
@@ -260,26 +342,30 @@ with col2:
     st.markdown(f"""
     <div class="app-card">
         <div class="app-card-header">
-            <h2>OptiRout'EES <br><span style="font-size: 0.8em; color: {EIFFAGE_RED};">Outil Général</span></h2>
+            <div>
+                <span class="badge badge-local">🔒 Local</span>
+                <h2>OptiRout'EES <span class="subtitle">Outil Général</span></h2>
+            </div>
             <div class="info-container">
-                <div class="info-icon">i</div>
+                <div class="info-icon">?</div>
                 <div class="tooltip-text">
-                    <strong>L'optimisation sur-mesure pour tous contrats</strong><br><br>
-                    Démarche d'utilisation :
+                    <strong>Solution d'optimisation sur-mesure</strong><br><br>
+                    Marche à suivre :
                     <ol>
-                        <li>Remplissez le gabarit Excel type fourni.</li>
-                        <li>Obtenez vos coordonnées GPS et calculez votre matrice (via l'outil OSRM).</li>
-                        <li>Importez votre dossier complet pour générer vos tournées optimisées.</li>
+                        <li>Renseignez le gabarit Excel type fourni.</li>
+                        <li>Obtenez vos coordonnées GPS et calculez votre matrice via l'outil OSRM.</li>
+                        <li>Importez votre dossier pour générer les tournées.</li>
                     </ol>
-                    <em>⚠️ Nécessite un accès au réseau interne Eiffage (lien local).</em><br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contactez le support</a>
+                    L'application génère l'itinéraire idéal et suggère des sites complémentaires si la journée du technicien n'est pas pleine.<br><br>
+                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contacter le support</a>
                 </div>
             </div>
         </div>
-        <p class="description">La solution universelle pour optimiser les itinéraires de vos équipes, quel que soit le contrat, l'agence ou le secteur d'activité visé.</p>
+        <p class="description">La solution polyvalente pour optimiser les itinéraires de vos techniciens en itinérance, applicable à n'importe quel contrat de maintenance.</p>
         <a href="http://172.17.38.0:8502/" target="_blank" class="app-button">Accéder à OptiRout'EES (Général)</a>
     </div>
     """, unsafe_allow_html=True)
+
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -290,24 +376,27 @@ with col3:
     st.markdown(f"""
     <div class="app-card">
         <div class="app-card-header">
-            <h2>Générateur de Cartes & Sectorisation</h2>
+            <div>
+                <span class="badge badge-cloud">☁️ Cloud</span>
+                <h2>Cartographie & Sectorisation</h2>
+            </div>
             <div class="info-container">
-                <div class="info-icon">i</div>
+                <div class="info-icon">?</div>
                 <div class="tooltip-text">
-                    <strong>Cartographie HTML interactive</strong><br><br>
-                    Module permettant de visualiser et d'exporter vos données selon 3 logiques :
+                    <strong>Visualisation de données géographiques</strong><br><br>
+                    Exportez et visualisez vos données selon 3 logiques :
                     <ul>
-                        <li><strong>K-means :</strong> Sectorisation automatique "intelligente" par zone.</li>
-                        <li><strong>Réseau :</strong> Basée sur les agences Clévia Centre-Est.</li>
-                        <li><strong>Sur-mesure :</strong> Basée sur vos propres colonnes (Technicien, Chargé d'affaires...).</li>
+                        <li><strong>Intelligente :</strong> Sectorisation automatique selon le nombre de zones souhaité.</li>
+                        <li><strong>Réseau :</strong> Découpage basé sur les agences Clévia Centre-Est.</li>
+                        <li><strong>Sur-mesure :</strong> Basé sur vos propres critères (Technicien, Chargé d'affaires...).</li>
                     </ul>
-                    Permet l'export CSV des coordonnées GPS.<br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contactez le support</a>
+                    Permet également d'exporter facilement les coordonnées GPS.<br><br>
+                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contacter le support</a>
                 </div>
             </div>
         </div>
-        <p class="description">Transformez vos données en cartes interactives. Idéal pour visualiser vos secteurs d'intervention, répartir la charge et exporter vos coordonnées GPS.</p>
-        <a href="https://creation-carte.streamlit.app/" target="_blank" class="app-button">Accéder à la Cartographie</a>
+        <p class="description">Transformez vos données brutes en cartes interactives. Un outil puissant pour visualiser vos secteurs d'intervention et répartir la charge de travail.</p>
+        <a href="https://creation-carte.streamlit.app/" target="_blank" class="app-button">Ouvrir l'outil de Cartographie</a>
     </div>
     """, unsafe_allow_html=True)
 
@@ -315,19 +404,22 @@ with col4:
     st.markdown(f"""
     <div class="app-card">
         <div class="app-card-header">
-            <h2>Matrice des Temps de Trajet (OSRM)</h2>
+            <div>
+                <span class="badge badge-local">🔒 Local</span>
+                <h2>Matrice des Temps (OSRM)</h2>
+            </div>
             <div class="info-container">
-                <div class="info-icon">i</div>
+                <div class="info-icon">?</div>
                 <div class="tooltip-text">
-                    <strong>Moteur de calcul logistique</strong><br><br>
-                    Cette interface s'appuie sur notre serveur OSRM local. Elle permet de croiser massivement des coordonnées GPS pour générer des matrices de temps de route et de distances sur tout le territoire français.<br><br>
-                    <em>⚠️ Nécessite un accès au réseau interne Eiffage (lien local).</em><br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contactez le support</a>
+                    <strong>Moteur de calcul logistique interne</strong><br><br>
+                    Cette interface s'appuie sur notre serveur OSRM local (France métropolitaine). Elle permet de croiser massivement des coordonnées GPS pour générer des matrices (export CSV).<br><br>
+                    <em>Prérequis indispensable avant d'ajouter de nouveaux contrats dans OptiRout'EES.</em><br><br>
+                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contacter le support</a>
                 </div>
             </div>
         </div>
-        <p class="description">Outil fondamental de planification : calculez instantanément les temps de parcours réels entre plusieurs centaines de points d'intervention en France.</p>
-        <a href="http://172.17.38.0:8503/" target="_blank" class="app-button">Accéder au Calculateur de Temps</a>
+        <p class="description">Calculez instantanément les temps de route et distances entre plusieurs centaines de points d'intervention. Indispensable pour paramétrer un nouveau contrat.</p>
+        <a href="http://172.17.38.0:8503/" target="_blank" class="app-button">Lancer le Calculateur (OSRM)</a>
     </div>
     """, unsafe_allow_html=True)
 
@@ -335,7 +427,7 @@ with col4:
 st.markdown(f"""
     <div class="footer-container">
         Développé pour <strong>Eiffage Énergie Systèmes - Clévia</strong><br>
-        Pour toute assistance technique, méthode ou évolution, contactez le service : <br>
+        Pour toute assistance technique, méthode ou suggestion d'évolution, contactez le service : <br>
         <a href="mailto:methodesmaintenance.energie@eiffage.com">methodesmaintenance.energie@eiffage.com</a>
     </div>
 """, unsafe_allow_html=True)
