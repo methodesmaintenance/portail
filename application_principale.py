@@ -19,13 +19,15 @@ st.markdown(f"""
         font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Police plus moderne */
     }}
 
+    /* Styles pour le titre principal */
     h1 {{
         color: {EIFFAGE_BLUE_DARK}; /* Bleu foncé Eiffage */
         text-align: center;
         font-size: 3em;
+        margin-top: 20px;
         margin-bottom: 30px;
         font-weight: bold;
-        padding-top: 20px;
+        padding-top: 0; /* Supprimé le padding-top car il y a déjà un margin-top */
     }}
 
     p {{
@@ -38,6 +40,7 @@ st.markdown(f"""
         text-decoration: none;
     }}
 
+    /* Styles pour les cartes d'application */
     .app-card {{
         background-color: {EIFFAGE_WHITE}; 
         border-radius: 10px;
@@ -54,21 +57,21 @@ st.markdown(f"""
         transform: translateY(-5px); 
     }}
 
-    /* Nouvelle section pour l'en-tête de la carte avec l'icône d'info */
+    /* En-tête de la carte avec titre et icône d'info */
     .app-card-header {{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 15px; /* Espace entre l'en-tête et le contenu */
-        border-bottom: 2px solid {EIFFAGE_ORANGE}; /* Soulignement orange */
+        margin-bottom: 15px; 
+        border-bottom: 2px solid {EIFFAGE_ORANGE}; 
         padding-bottom: 10px;
     }}
 
     .app-card-header h2 {{
         color: {EIFFAGE_BLUE_DARK}; 
         font-size: 1.8em;
-        margin: 0; /* Supprime la marge par défaut du h2 pour un meilleur alignement */
-        border-bottom: none; /* Le h2 n'a pas son propre soulignement */
+        margin: 0; 
+        border-bottom: none; 
     }}
 
     /* Styles pour l'icône d'information (i) et l'info-bulle */
@@ -76,17 +79,18 @@ st.markdown(f"""
         position: relative;
         display: inline-block;
         cursor: help;
-        font-size: 0.9em; /* Taille de l'icône */
+        font-size: 1em; /* Taille de l'icône */
         color: {EIFFAGE_BLUE_DARK};
         font-weight: bold;
         background-color: {EIFFAGE_GREY_LIGHT};
         border-radius: 50%;
-        width: 25px;
-        height: 25px;
+        width: 30px; /* Taille augmentée pour meilleure visibilité */
+        height: 30px;
         display: flex;
         justify-content: center;
         align-items: center;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        z-index: 10; /* Assure que l'icône est au-dessus pour le survol */
     }}
 
     .info-icon:hover {{
@@ -96,28 +100,33 @@ st.markdown(f"""
 
     .info-icon .tooltip-text {{
         visibility: hidden;
-        width: 300px; /* Largeur de l'info-bulle */
+        width: 320px; /* Largeur de l'info-bulle légèrement augmentée */
         background-color: {EIFFAGE_BLUE_DARK};
         color: {EIFFAGE_WHITE};
         text-align: left;
-        border-radius: 6px;
-        padding: 10px;
+        border-radius: 8px; /* Bords plus arrondis */
+        padding: 12px;
         position: absolute;
-        z-index: 1;
-        bottom: 125%; /* Affiche l'info-bulle au-dessus de l'icône */
+        z-index: 999; /* TRÈS IMPORTANT : Assure que l'info-bulle est au premier plan */
+        bottom: 125%; 
         left: 50%;
-        margin-left: -150px; /* Centre l'info-bulle */
+        margin-left: -160px; /* Centre l'info-bulle (moitié de la largeur) */
         opacity: 0;
-        transition: opacity 0.3s;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        font-size: 0.9em;
-        line-height: 1.4;
+        transition: opacity 0.3s ease-in-out; /* Transition douce pour l'apparition */
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* Ombre plus prononcée */
+        font-size: 0.95em; /* Texte légèrement plus grand */
+        line-height: 1.5;
+    }}
+
+    .info-icon .tooltip-text a {{ /* Style pour les liens dans l'info-bulle */
+        color: {EIFFAGE_WHITE};
+        text-decoration: underline;
     }}
 
     .info-icon .tooltip-text::after {{
         content: "";
         position: absolute;
-        top: 100%; /* Pointe en bas de l'info-bulle */
+        top: 100%; 
         left: 50%;
         margin-left: -5px;
         border-width: 5px;
@@ -135,6 +144,7 @@ st.markdown(f"""
         margin-bottom: 20px;
     }}
 
+    /* Styles pour les boutons d'application */
     .app-button {{
         display: block; 
         padding: 12px 25px;
@@ -154,20 +164,39 @@ st.markdown(f"""
         color: {EIFFAGE_WHITE} !important;
     }}
 
+    /* Styles pour le pied de page */
     .footer-text {{
         text-align: center;
-        margin-top: 30px;
-        font-size: 1.1em;
+        margin-top: 40px; /* Marge supérieure augmentée */
+        padding-top: 20px;
+        border-top: 1px solid rgba(0,0,0,0.1); /* Ligne subtile au-dessus du pied de page */
+        font-size: 1em;
         color: {EIFFAGE_BLUE_DARK};
         font-style: italic;
+    }}
+
+    .footer-text a {{
+        color: {EIFFAGE_BLUE_DARK};
+        text-decoration: underline;
+        font-weight: bold;
+    }}
+
+    .eiffage-logo {{
+        display: block;
+        max-width: 200px; /* Ajustez la taille du logo si nécessaire */
+        margin: 20px auto 10px auto; /* Centre le logo et ajoute des marges */
     }}
 
     </style>
     """, unsafe_allow_html=True)
 
+# --- Affichage du logo Eiffage ---
+# REMPLACEZ '[CHEMIN_VERS_VOTRE_LOGO.png]' par le chemin d'accès local ou l'URL publique de votre logo.
+# Par exemple: st.image("mon_dossier/logo_eiffage.png") ou st.image("https://example.com/logo_eiffage.png")
+st.image("https://www.eiffage.com/themes/eiffage/images/logo.png", use_column_width=False, output_format="PNG", caption="Logo Eiffage", width=200)
+
 
 st.title("Portail d'Applications")
-
 
 st.markdown("---") # Ligne de séparation visuelle
 
@@ -184,9 +213,9 @@ with col1:
                 <span class="tooltip-text">
                     Cette application est dédiée à l'optimisation des tournées des techniciens pour le contrat La Poste Immobilier. Elle s'actualise directement avec le fichier de suivi PEC, intégrant les horaires mis à jour pour plus de 500 sites afin de maximiser l'efficacité.
                     <br><br>
-                    Note : Cette application utilise un lien local et peut nécessiter un accès au réseau interne.
+                    **Note importante :** Cette application utilise un lien local et peut nécessiter un accès au réseau interne d'Eiffage pour fonctionner.
                     <br><br>
-                    Pour toute question ou assistance, contactez : <a href="mailto:methodesmaintenance.energie@eiffage.com" style="color: {EIFFAGE_WHITE}; text-decoration: underline;">methodesmaintenance.energie@eiffage.com</a>
+                    Pour toute question ou assistance, contactez : <a href="mailto:methodesmaintenance.energie@eiffage.com">methodesmaintenance.energie@eiffage.com</a>
                 </span>
             </div>
         </div>
@@ -203,9 +232,15 @@ with col2:
             <div class="info-icon">
                 i
                 <span class="tooltip-text">
-                    Créez des cartes HTML interactives avec différentes options de sectorisation : intelligente (k-means pour des clusters géographiques), par agence Clévia Centre-Est, ou personnalisée via une colonne de données (par technicien, chargé d'affaires, secteur d'activité). Elle permet également de récupérer les données GPS de tous les points au format CSV.
+                    Créez des cartes HTML interactives avec différentes options de sectorisation :
+                    <ul>
+                        <li>**Sectorisation intelligente (K-means)** : Choisissez le nombre de clusters pour des secteurs à vol d'oiseau.</li>
+                        <li>**Sectorisation par agence** : Basée sur les agences Clévia Centre-Est.</li>
+                        <li>**Sectorisation personnalisée** : Utilisez une colonne de données existante (par technicien, chargé d'affaires, secteur d'activité).</li>
+                    </ul>
+                    Elle permet également de récupérer les données GPS de tous les points au format CSV.
                     <br><br>
-                    Pour toute question ou assistance, contactez : <a href="mailto:methodesmaintenance.energie@eiffage.com" style="color: {EIFFAGE_WHITE}; text-decoration: underline;">methodesmaintenance.energie@eiffage.com</a>
+                    Pour toute question ou assistance, contactez : <a href="mailto:methodesmaintenance.energie@eiffage.com">methodesmaintenance.energie@eiffage.com</a>
                 </span>
             </div>
         </div>
@@ -227,11 +262,11 @@ with col3:
             <div class="info-icon">
                 i
                 <span class="tooltip-text">
-                    Cette application utilise un serveur OSRM local pour générer des matrices de temps de route en France, même pour un grand nombre de points. C'est un outil essentiel pour la planification et est notamment utilisée par OptiRout'EES Générale pour créer de nouveaux onglets ou contrats.
+                    Cette application appelle un serveur OSRM local pour générer des matrices de temps de route en France, supportant un grand nombre de points. C'est un outil fondamental pour la planification logistique et est notamment utilisée par OptiRout'EES Générale pour la création de nouveaux onglets, contrats ou secteurs.
                     <br><br>
-                    Note : Cette application utilise un lien local et peut nécessiter un accès au réseau interne.
+                    **Note importante :** Cette application utilise un lien local et peut nécessiter un accès au réseau interne d'Eiffage pour fonctionner.
                     <br><br>
-                    Pour toute question ou assistance, contactez : <a href="mailto:methodesmaintenance.energie@eiffage.com" style="color: {EIFFAGE_WHITE}; text-decoration: underline;">methodesmaintenance.energie@eiffage.com</a>
+                    Pour toute question ou assistance, contactez : <a href="mailto:methodesmaintenance.energie@eiffage.com">methodesmaintenance.energie@eiffage.com</a>
                 </span>
             </div>
         </div>
@@ -248,11 +283,18 @@ with col4:
             <div class="info-icon">
                 i
                 <span class="tooltip-text">
-                    Similaire à l'application La Poste Immobilier, cette version généralisée d'OptiRout'EES permet d'optimiser les itinéraires pour n'importe quel contrat ou secteur. Il suffit de remplir un template fourni, de récupérer les coordonnées GPS via l'application dédiée, puis la matrice de temps de trajet, et de tout uploader pour planifier votre journée. Cette application n'est pas connectée directement à un SharePoint.
+                    Similaire à l'application La Poste Immobilier, cette version généralisée d'OptiRout'EES permet d'optimiser les itinéraires pour n'importe quel contrat ou secteur. Le processus inclut :
+                    <ol>
+                        <li>Remplir un template fourni dans l'appli.</li>
+                        <li>Récupérer les coordonnées GPS via l'application "Coordonnées GPS" (non listée ici).</li>
+                        <li>Générer la matrice de temps de trajet grâce à l'application "Matrice des Temps de Trajet".</li>
+                        <li>Uploader ces données dans l'appli pour retrouver votre contrat et utiliser l'outil d'optimisation d'itinéraire sur la journée.</li>
+                    </ol>
+                    Cette application n'est pas directement connectée à un SharePoint.
                     <br><br>
-                    Note : Cette application utilise un lien local et peut nécessiter un accès au réseau interne.
+                    **Note importante :** Cette application utilise un lien local et peut nécessiter un accès au réseau interne d'Eiffage pour fonctionner.
                     <br><br>
-                    Pour toute question ou assistance, contactez : <a href="mailto:methodesmaintenance.energie@eiffage.com" style="color: {EIFFAGE_WHITE}; text-decoration: underline;">methodesmaintenance.energie@eiffage.com</a>
+                    Pour toute question ou assistance, contactez : <a href="mailto:methodesmaintenance.energie@eiffage.com">methodesmaintenance.energie@eiffage.com</a>
                 </span>
             </div>
         </div>
@@ -265,6 +307,6 @@ with col4:
 st.markdown(f"""
     <div class="footer-text">
         Développé avec ❤️ pour Eiffage Énergie Systèmes<br>
-        Pour toute assistance ou question technique, veuillez contacter : <a href="mailto:methodesmaintenance.energie@eiffage.com" style="color: {EIFFAGE_BLUE_DARK}; text-decoration: underline;">methodesmaintenance.energie@eiffage.com</a>
+        Pour toute assistance ou question technique, veuillez contacter : <a href="mailto:methodesmaintenance.energie@eiffage.com">methodesmaintenance.energie@eiffage.com</a>
     </div>
     """, unsafe_allow_html=True)
