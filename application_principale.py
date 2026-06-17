@@ -8,15 +8,16 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. Charte graphique EIFFAGE modernisée
+# 2. Charte graphique EIFFAGE — Version lumineuse
 EIFFAGE_BLACK = "#111111"
 EIFFAGE_RED = "#E63312"
-BG_COLOR = "#F0F2F5"
+BG_COLOR = "#FFFFFF"
 TEXT_COLOR = "#2A2A2A"
-CARD_BG = "rgba(255, 255, 255, 0.85)"
+CARD_BG = "#FFFFFF"
 SUBTLE_GRAY = "#6B7280"
+LIGHT_SURFACE = "#F7F8FA"
 
-# 3. CSS personnalisé — Version Moderne
+# 3. CSS personnalisé — Version Lumineuse Moderne
 st.markdown(f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -26,14 +27,10 @@ st.markdown(f"""
        ═══════════════════════════════════════ */
     .stApp {{
         background: {BG_COLOR};
-        background-image:
-            radial-gradient(ellipse at 0% 0%, rgba(230, 51, 18, 0.03) 0%, transparent 50%),
-            radial-gradient(ellipse at 100% 100%, rgba(17, 17, 17, 0.03) 0%, transparent 50%);
         color: {TEXT_COLOR};
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }}
 
-    /* Masquer les éléments Streamlit par défaut */
     #MainMenu, footer, header {{visibility: hidden;}}
     .block-container {{
         padding-top: 2rem;
@@ -47,7 +44,7 @@ st.markdown(f"""
     @keyframes fadeInUp {{
         from {{
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(25px);
         }}
         to {{
             opacity: 1;
@@ -55,99 +52,85 @@ st.markdown(f"""
         }}
     }}
 
-    @keyframes shimmer {{
-        0% {{ background-position: -200% center; }}
-        100% {{ background-position: 200% center; }}
-    }}
-
-    @keyframes pulse {{
-        0%, 100% {{ opacity: 1; }}
-        50% {{ opacity: 0.6; }}
-    }}
-
     /* ═══════════════════════════════════════
-       EN-TÊTE PRINCIPAL (HERO)
+       EN-TÊTE (HERO) — VERSION LUMINEUSE
        ═══════════════════════════════════════ */
     .hero-section {{
-        background: linear-gradient(135deg, {EIFFAGE_BLACK} 0%, #1a1a2e 50%, #16213e 100%);
+        background: {LIGHT_SURFACE};
         border-radius: 20px;
-        padding: 50px 40px;
+        padding: 48px 40px 44px 40px;
         text-align: center;
         margin-bottom: 45px;
         position: relative;
         overflow: hidden;
         animation: fadeInUp 0.6s ease-out;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.05);
     }}
 
+    /* Ligne d'accent rouge en haut */
     .hero-section::before {{
         content: '';
         position: absolute;
         top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background:
-            radial-gradient(circle at 20% 50%, rgba(230, 51, 18, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 50%, rgba(230, 51, 18, 0.05) 0%, transparent 50%);
-        pointer-events: none;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: {EIFFAGE_RED};
+        border-radius: 0 0 4px 4px;
     }}
 
+    /* Cercle décoratif subtil */
     .hero-section::after {{
         content: '';
         position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 4px;
-        background: {EIFFAGE_RED};
-        border-radius: 2px;
+        top: -60px;
+        right: -60px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(230, 51, 18, 0.04) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
     }}
 
     .hero-logo {{
-        margin-bottom: 20px;
+        margin-bottom: 22px;
         position: relative;
         z-index: 1;
     }}
 
-    .hero-logo img {{
-        filter: brightness(0) invert(1);
-        opacity: 0.95;
-    }}
-
     .hero-title {{
-        color: #ffffff;
-        font-size: 2.6em;
+        color: {EIFFAGE_BLACK};
+        font-size: 2.5em;
         font-weight: 800;
-        margin: 0 0 10px 0;
+        margin: 0 0 8px 0;
         letter-spacing: -1px;
         position: relative;
         z-index: 1;
     }}
 
     .hero-subtitle {{
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 1.1em;
+        color: {SUBTLE_GRAY};
+        font-size: 1.05em;
         font-weight: 400;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
         position: relative;
         z-index: 1;
     }}
 
     .hero-badge {{
         display: inline-block;
-        background: rgba(230, 51, 18, 0.15);
-        border: 1px solid rgba(230, 51, 18, 0.3);
-        color: #FF6B57;
-        padding: 6px 16px;
+        background: rgba(230, 51, 18, 0.08);
+        border: 1px solid rgba(230, 51, 18, 0.15);
+        color: {EIFFAGE_RED};
+        padding: 6px 18px;
         border-radius: 50px;
-        font-size: 0.8em;
+        font-size: 0.82em;
         font-weight: 600;
         margin-top: 18px;
         position: relative;
         z-index: 1;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
     }}
 
     /* ═══════════════════════════════════════
@@ -158,57 +141,53 @@ st.markdown(f"""
         align-items: center;
         gap: 12px;
         margin-bottom: 25px;
-        animation: fadeInUp 0.6s ease-out 0.2s both;
+        animation: fadeInUp 0.6s ease-out 0.15s both;
     }}
 
     .section-header h3 {{
         color: {EIFFAGE_BLACK};
-        font-size: 1.3em;
+        font-size: 1.25em;
         font-weight: 700;
         margin: 0;
         letter-spacing: -0.3px;
     }}
 
     .section-header .section-icon {{
-        background: linear-gradient(135deg, {EIFFAGE_RED}, #FF6B57);
+        background: {EIFFAGE_RED};
         color: white;
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.1em;
+        font-size: 1em;
     }}
 
     .section-header::after {{
         content: '';
         flex: 1;
         height: 1px;
-        background: linear-gradient(to right, rgba(0,0,0,0.08), transparent);
+        background: linear-gradient(to right, rgba(0,0,0,0.06), transparent);
         margin-left: 10px;
     }}
 
     /* ═══════════════════════════════════════
-       CARTES D'APPLICATION (GLASSMORPHISM)
+       CARTES D'APPLICATION
        ═══════════════════════════════════════ */
     .app-card {{
         background: {CARD_BG};
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
         border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.6);
-        box-shadow:
-            0 4px 24px rgba(0, 0, 0, 0.04),
-            0 1px 2px rgba(0, 0, 0, 0.02);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
         padding: 32px;
         margin-bottom: 25px;
-        transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        animation: fadeInUp 0.6s ease-out 0.3s both;
+        animation: fadeInUp 0.6s ease-out 0.25s both;
         position: relative;
         overflow: hidden;
     }}
@@ -220,17 +199,15 @@ st.markdown(f"""
         left: 0;
         right: 0;
         height: 3px;
-        background: linear-gradient(90deg, {EIFFAGE_RED}, #FF6B57, {EIFFAGE_RED});
+        background: {EIFFAGE_RED};
         opacity: 0;
-        transition: opacity 0.35s ease;
+        transition: opacity 0.3s ease;
     }}
 
     .app-card:hover {{
-        transform: translateY(-6px);
-        box-shadow:
-            0 20px 50px rgba(0, 0, 0, 0.08),
-            0 8px 20px rgba(0, 0, 0, 0.04);
-        border-color: rgba(230, 51, 18, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
+        border-color: rgba(230, 51, 18, 0.12);
     }}
 
     .app-card:hover::before {{
@@ -260,7 +237,7 @@ st.markdown(f"""
 
     .app-card-header h2 {{
         color: {EIFFAGE_BLACK};
-        font-size: 1.35em;
+        font-size: 1.3em;
         font-weight: 700;
         margin: 0;
         line-height: 1.3;
@@ -268,11 +245,11 @@ st.markdown(f"""
     }}
 
     .app-card-header h2 .card-subtitle {{
-        font-size: 0.75em;
+        font-size: 0.78em;
         color: {EIFFAGE_RED};
         font-weight: 600;
         display: block;
-        margin-top: 4px;
+        margin-top: 3px;
     }}
 
     /* Badge de statut */
@@ -289,15 +266,15 @@ st.markdown(f"""
     }}
 
     .status-badge.internal {{
-        background: rgba(16, 185, 129, 0.1);
+        background: rgba(16, 185, 129, 0.08);
         color: #059669;
-        border: 1px solid rgba(16, 185, 129, 0.2);
+        border: 1px solid rgba(16, 185, 129, 0.15);
     }}
 
     .status-badge.external {{
-        background: rgba(59, 130, 246, 0.1);
+        background: rgba(59, 130, 246, 0.08);
         color: #2563EB;
-        border: 1px solid rgba(59, 130, 246, 0.2);
+        border: 1px solid rgba(59, 130, 246, 0.15);
     }}
 
     /* Icône info et Tooltip */
@@ -310,7 +287,7 @@ st.markdown(f"""
     .info-icon {{
         cursor: pointer;
         color: {SUBTLE_GRAY};
-        background-color: rgba(0, 0, 0, 0.04);
+        background-color: {LIGHT_SURFACE};
         border-radius: 50%;
         min-width: 30px;
         height: 30px;
@@ -332,7 +309,7 @@ st.markdown(f"""
     .tooltip-text {{
         visibility: hidden;
         width: 350px;
-        background: linear-gradient(135deg, {EIFFAGE_BLACK} 0%, #1a1a2e 100%);
+        background: {EIFFAGE_BLACK};
         color: #ffffff;
         text-align: left;
         border-radius: 14px;
@@ -344,11 +321,10 @@ st.markdown(f"""
         opacity: 0;
         transition: opacity 0.25s ease, transform 0.25s ease;
         transform: translateY(5px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
         font-size: 0.88em;
         line-height: 1.6;
         font-weight: 400;
-        border: 1px solid rgba(255, 255, 255, 0.08);
     }}
 
     .info-container:hover .tooltip-text {{
@@ -364,7 +340,7 @@ st.markdown(f"""
         right: 12px;
         border-width: 7px;
         border-style: solid;
-        border-color: #1a1a2e transparent transparent transparent;
+        border-color: {EIFFAGE_BLACK} transparent transparent transparent;
     }}
 
     .tooltip-text strong {{
@@ -383,7 +359,7 @@ st.markdown(f"""
     }}
 
     .tooltip-text em {{
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(255, 255, 255, 0.55);
         font-size: 0.92em;
     }}
 
@@ -391,17 +367,16 @@ st.markdown(f"""
         color: #FF6B57;
         text-decoration: none;
         font-weight: 600;
-        transition: color 0.2s;
     }}
     .tooltip-text a:hover {{
         color: #FFB4A8;
         text-decoration: underline;
     }}
 
-    /* Description de la carte */
+    /* Description */
     .app-card p.description {{
         flex-grow: 1;
-        font-size: 0.98em;
+        font-size: 0.96em;
         color: {SUBTLE_GRAY};
         line-height: 1.7;
         margin-bottom: 24px;
@@ -415,12 +390,12 @@ st.markdown(f"""
         align-items: center;
         justify-content: center;
         gap: 8px;
-        padding: 15px 24px;
-        background: linear-gradient(135deg, {EIFFAGE_RED} 0%, #C4200A 100%);
+        padding: 14px 24px;
+        background: {EIFFAGE_RED};
         color: #ffffff !important;
         text-align: center;
         text-decoration: none;
-        font-size: 0.95em;
+        font-size: 0.93em;
         font-weight: 600;
         border-radius: 10px;
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -437,14 +412,14 @@ st.markdown(f"""
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
         transition: left 0.5s ease;
     }}
 
     .app-button:hover {{
-        background: linear-gradient(135deg, {EIFFAGE_BLACK} 0%, #2a2a3e 100%);
+        background: {EIFFAGE_BLACK};
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
     }}
 
     .app-button:hover::before {{
@@ -466,7 +441,7 @@ st.markdown(f"""
     hr {{
         border: 0;
         height: 1px;
-        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.06), transparent);
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05), transparent);
         margin: 10px 0 35px 0;
     }}
 
@@ -476,26 +451,24 @@ st.markdown(f"""
     .footer-container {{
         text-align: center;
         margin-top: 60px;
-        padding: 35px 30px;
-        background: {CARD_BG};
-        backdrop-filter: blur(20px);
+        padding: 32px 30px;
+        background: {LIGHT_SURFACE};
         border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.6);
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
-        animation: fadeInUp 0.6s ease-out 0.5s both;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        animation: fadeInUp 0.6s ease-out 0.4s both;
     }}
 
     .footer-brand {{
         font-size: 1em;
         font-weight: 700;
         color: {EIFFAGE_BLACK};
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }}
 
     .footer-contact {{
         font-size: 0.9em;
         color: {SUBTLE_GRAY};
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }}
 
     .footer-container a {{
@@ -513,18 +486,18 @@ st.markdown(f"""
         width: 40px;
         height: 2px;
         background: {EIFFAGE_RED};
-        margin: 15px auto;
+        margin: 14px auto;
         border-radius: 1px;
     }}
 
     .footer-copy {{
-        font-size: 0.8em;
-        color: rgba(0,0,0,0.3);
+        font-size: 0.78em;
+        color: rgba(0,0,0,0.25);
     }}
     </style>
 """, unsafe_allow_html=True)
 
-# 4. Fonction utilitaire pour le logo
+# 4. Logo
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
@@ -537,7 +510,7 @@ try:
 except FileNotFoundError:
     img_tag = f'<p style="color:{EIFFAGE_RED};">⚠️ Image "{image_filename}" introuvable.</p>'
 
-# 5. Section Hero
+# 5. Section Hero — Lumineuse
 st.markdown(f"""
     <div class="hero-section">
         <div class="hero-logo">
@@ -701,7 +674,7 @@ with col4:
     </div>
     """, unsafe_allow_html=True)
 
-# 8. Pied de page modernisé
+# 8. Pied de page
 st.markdown(f"""
     <div class="footer-container">
         <div class="footer-brand">Eiffage Énergie Systèmes — Clévia</div>
