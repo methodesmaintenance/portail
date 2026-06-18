@@ -190,7 +190,7 @@ st.markdown(f"""
         position: absolute;
         z-index: 9999; 
         top: 135%; 
-        right: 0; 
+        right: -10px; 
         opacity: 0;
         transition: opacity 0.2s, bottom 0.2s;
         box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -202,14 +202,14 @@ st.markdown(f"""
     .info-container:hover .tooltip-text {{
         visibility: visible;
         opacity: 1;
-        bottom: 125%; 
+        top: 125%; 
     }}
 
     .tooltip-text::after {{
         content: "";
         position: absolute;
-        top: 100%;
-        right: 12px;
+        bottom : 100%;
+        right: 20px;
         margin-left: -5px;
         border-width: 6px;
         border-style: solid;
