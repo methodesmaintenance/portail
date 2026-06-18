@@ -109,10 +109,12 @@ st.markdown(f"""
         justify-content: space-between;
         border: 1px solid rgba(0,0,0,0.03);
         position: relative;
+        z-index: 1;
     }}
     .app-card:hover {{
         transform: translateY(-5px);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); 
+        z-index: 50;
     }}
     
     /* Bordure supérieure de couleur au survol */
