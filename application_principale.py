@@ -392,7 +392,7 @@ with col3:
                         <li><strong>Réseau :</strong> Découpage basé sur les agences Clévia Centre-Est.</li>
                         <li><strong>Sur-mesure :</strong> Basé sur vos propres critères (Technicien, Chargé d'affaires, secteur d'activité...).</li>
                     </ul>
-                    Permet également d'exporter facilement la carte intéractive en format html et les coordonnées GPS, nécessaire au déployement d'un contrat sur OptiRout'EES.<br><br>
+                    Permet également d'exporter les coordonnées GPS.<br><br>
                 </div>
             </div>
         </div>
