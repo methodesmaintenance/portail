@@ -318,29 +318,9 @@ st.markdown(f"""
 # 5. LIGNE 1 : Les deux applications OptiRout'EES
 col1, col2 = st.columns(2)
 
-with col1:
-    st.markdown(f"""
-    <div class="app-card">
-        <div class="app-card-header">
-            <div>
-                <span class="badge badge-local">🔒 Local</span>
-                <h2>OptiRout'EES <span class="subtitle">Contrat La Poste Immobilier</span></h2>
-            </div>
-            <div class="info-container">
-                <div class="info-icon">?</div>
-                <div class="tooltip-text">
-                    <strong>Optimisation des tournées - LPI</strong><br><br>
-                    Application connectée en temps réel au fichier de suivi Prise en Charge (PEC). Elle intègre automatiquement les mises à jour Excel et génère les itinéraires de maintenance les plus performants pour plus de 500 sites.<br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contacter le support</a>
-                </div>
-            </div>
-        </div>
-        <p class="description">Générez et optimisez les tournées de vos techniciens avec une synchronisation dynamique des données PEC, un outil pensé sur-mesure pour le contrat LPI.</p>
-        <a href="http://172.17.38.0:8501/" target="_blank" class="app-button">Accéder à OptiRout'EES (LPI)</a>
-    </div>
-    """, unsafe_allow_html=True)
 
-with col2:
+
+with col1:
     st.markdown(f"""
     <div class="app-card">
         <div class="app-card-header">
@@ -354,17 +334,37 @@ with col2:
                     <strong>Solution d'optimisation sur-mesure</strong><br><br>
                     Marche à suivre :
                     <ol>
-                        <li>Renseignez le gabarit Excel type fourni.</li>
-                        <li>Obtenez vos coordonnées GPS et calculez votre matrice via l'outil OSRM.</li>
+                        <li>Renseignez le gabarit Excel type téléchargeable dans l'application.</li>
+                        <li>Obtenez vos coordonnées GPS et calculez votre matrice via les outils cartographies et matrice de temps de route.</li>
                         <li>Importez votre dossier pour générer les tournées.</li>
                     </ol>
                     L'application génère l'itinéraire idéal et suggère des sites complémentaires si la journée du technicien n'est pas pleine.<br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contacter le support</a>
                 </div>
             </div>
         </div>
         <p class="description">La solution polyvalente pour optimiser les itinéraires de vos techniciens en itinérance, applicable à n'importe quel contrat de maintenance.</p>
         <a href="http://172.17.38.0:8502/" target="_blank" class="app-button">Accéder à OptiRout'EES (Général)</a>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown(f"""
+    <div class="app-card">
+        <div class="app-card-header">
+            <div>
+                <span class="badge badge-local">🔒 Local</span>
+                <h2>OptiRout'EES <span class="subtitle">Contrat La Poste Immobilier</span></h2>
+            </div>
+            <div class="info-container">
+                <div class="info-icon">?</div>
+                <div class="tooltip-text">
+                    <strong>Optimisation des tournées - LPI</strong><br><br>
+                    Application connectée en temps réel au fichier de suivi Prise en Charge (PEC). Elle intègre automatiquement les mises à jour Excel et génère les itinéraires de maintenance les plus performants pour plus de 500 sites.<br><br>
+                </div>
+            </div>
+        </div>
+        <p class="description">Générez et optimisez les tournées des techniciens avec une synchronisation dynamique des données PEC, un outil sur-mesure pour le contrat LPI.</p>
+        <a href="http://172.17.38.0:8501/" target="_blank" class="app-button">Accéder à OptiRout'EES (LPI)</a>
     </div>
     """, unsafe_allow_html=True)
 
@@ -390,10 +390,9 @@ with col3:
                     <ul>
                         <li><strong>Intelligente :</strong> Sectorisation automatique selon le nombre de zones souhaité.</li>
                         <li><strong>Réseau :</strong> Découpage basé sur les agences Clévia Centre-Est.</li>
-                        <li><strong>Sur-mesure :</strong> Basé sur vos propres critères (Technicien, Chargé d'affaires...).</li>
+                        <li><strong>Sur-mesure :</strong> Basé sur vos propres critères (Technicien, Chargé d'affaires, secteur d'activité...).</li>
                     </ul>
-                    Permet également d'exporter facilement les coordonnées GPS.<br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contacter le support</a>
+                    Permet également d'exporter facilement la carte intéractive en format html et les coordonnées GPS, nécessaire au déployement d'un contrat sur OptiRout'EES.<br><br>
                 </div>
             </div>
         </div>
@@ -416,11 +415,10 @@ with col4:
                     <strong>Moteur de calcul logistique interne</strong><br><br>
                     Cette interface s'appuie sur notre serveur OSRM local (France métropolitaine). Elle permet de croiser massivement des coordonnées GPS pour générer des matrices (export CSV).<br><br>
                     <em>Prérequis indispensable avant d'ajouter de nouveaux contrats dans OptiRout'EES.</em><br><br>
-                    Assistance : <a href="mailto:methodesmaintenance.energie@eiffage.com">Contacter le support</a>
                 </div>
             </div>
         </div>
-        <p class="description">Calculez instantanément les temps de route et distances entre plusieurs centaines de points d'intervention. Indispensable pour paramétrer un nouveau contrat.</p>
+        <p class="description">Calculez instantanément les temps de route et distances entre plusieurs centaines de points d'intervention. Indispensable pour paramétrer un nouveau contrat sur OptiRout'EES.</p>
         <a href="http://172.17.38.0:8503/" target="_blank" class="app-button">Lancer le Calculateur (OSRM)</a>
     </div>
     """, unsafe_allow_html=True)
@@ -429,7 +427,7 @@ with col4:
 st.markdown(f"""
     <div class="footer-container">
         Développé pour <strong>Eiffage Énergie Systèmes - Clévia</strong><br>
-        Pour toute assistance technique, méthode ou suggestion d'évolution, contactez le service : <br>
+        Pour toute assistance, contactez le service : <br>
         <a href="mailto:methodesmaintenance.energie@eiffage.com">methodesmaintenance.energie@eiffage.com</a>
     </div>
 """, unsafe_allow_html=True)
