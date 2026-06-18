@@ -360,6 +360,9 @@ with col2:
                 <div class="tooltip-text">
                     <strong>Optimisation des tournées - LPI</strong><br><br>
                     Application connectée en temps réel au fichier de suivi Prise en Charge (PEC). Elle intègre automatiquement les mises à jour Excel et génère les itinéraires de maintenance les plus performants pour plus de 500 sites.<br><br>
+                    <strong>⚠️ Accès restreint</strong><br>
+                    Un mot de passe est nécessaire. Pour l'obtenir, contactez le support :<br>
+                    <a href="mailto:methodesmaintenance.energie@eiffage.com">methodesmaintenance.energie@eiffage.com</a>
                 </div>
             </div>
         </div>
