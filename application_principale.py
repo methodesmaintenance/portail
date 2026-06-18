@@ -420,7 +420,7 @@ with col4:
                 </div>
             </div>
         </div>
-        <p class="description">Calculez instantanément les temps de route et distances entre plusieurs centaines de points d'intervention. Indispensable pour paramétrer un nouveau contrat sur OptiRout'EES.</p>
+        <p class="description">Calculez instantanément les temps de route entre plusieurs centaines de points d'intervention. Indispensable pour paramétrer un nouveau contrat sur OptiRout'EES.</p>
         <a href="http://172.17.38.0:8503/" target="_blank" class="app-button">Lancer le Calculateur (OSRM)</a>
     </div>
     """, unsafe_allow_html=True)
