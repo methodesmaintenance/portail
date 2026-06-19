@@ -318,8 +318,6 @@ st.markdown(f"""
 # 5. LIGNE 1 : Les deux applications OptiRout'EES
 col1, col2 = st.columns(2)
 
-
-
 with col1:
     st.markdown(f"""
     <div class="app-card">
@@ -425,7 +423,34 @@ with col4:
     </div>
     """, unsafe_allow_html=True)
 
-# 7. Pied de page
+st.markdown("<br>", unsafe_allow_html=True)
+
+# 7. NOUVELLE LIGNE : Chat Eiffage
+col5, = st.columns(1) # Utilise un seul élément dans le tuple pour une colonne unique
+
+with col5:
+    st.markdown(f"""
+    <div class="app-card">
+        <div class="app-card-header">
+            <div>
+                <span class="badge badge-cloud">☁️ Cloud</span>
+                <h2>Chat Eiffage <span class="subtitle">Assistant IA</span></h2>
+            </div>
+            <div class="info-container">
+                <div class="info-icon">?</div>
+                <div class="tooltip-text">
+                    <strong>Votre assistant intelligent chez Eiffage</strong><br><br>
+                    Le Chat Eiffage est une intelligence artificielle conçue pour vous aider dans vos tâches quotidiennes, répondre à vos questions et faciliter l'accès à l'information au sein du groupe.
+                    N'hésitez pas à lui poser toutes vos questions !
+                </div>
+            </div>
+        </div>
+        <p class="description">Accédez à votre assistant IA interne, un outil précieux pour obtenir des réponses rapides, rédiger des documents ou explorer de nouvelles solutions pour vos projets.</p>
+        <a href="https://chat.dpg.eiffage.com/" target="_blank" class="app-button">Accéder au Chat Eiffage</a>
+    </div>
+    """, unsafe_allow_html=True)
+
+# 8. Pied de page
 st.markdown(f"""
     <div class="footer-container">
         Développé pour <strong>Eiffage Énergie Systèmes - Clévia</strong><br>
