@@ -26,7 +26,7 @@ st.markdown(f"""
         font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }}
 
-    /* Container de l'en-tête (Flexbox pour aligner à gauche et à droite) */
+    /* Container de l'en-tête */
     .header-container {{
         display: flex;
         justify-content: space-between;
@@ -39,22 +39,9 @@ st.markdown(f"""
         gap: 20px;
     }}
 
-    /* Section Gauche : Logo et Titre */
-    .header-left {{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }}
+    .header-left {{ display: flex; flex-direction: column; align-items: flex-start; }}
+    .main-title {{ color: {EIFFAGE_BLACK}; font-size: 2.4em; font-weight: 800; letter-spacing: -0.5px; margin-top: 15px; }}
 
-    .main-title {{
-        color: {EIFFAGE_BLACK};
-        font-size: 2.4em;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-        margin-top: 15px;
-    }}
-
-    /* Section Droite : Légende d'accès */
     .header-right {{
         background: #FFFFFF;
         padding: 15px 20px;
@@ -66,36 +53,16 @@ st.markdown(f"""
         max-width: 400px;
     }}
     
-    .legend-title {{
-        font-weight: 700;
-        margin-bottom: 8px;
-        color: {EIFFAGE_BLACK};
-        border-bottom: 2px solid {BG_COLOR};
-        padding-bottom: 5px;
-    }}
-
-    .legend-item {{
-        margin-bottom: 6px;
-        line-height: 1.4;
-    }}
+    .legend-title {{ font-weight: 700; margin-bottom: 8px; color: {EIFFAGE_BLACK}; border-bottom: 2px solid {BG_COLOR}; padding-bottom: 5px; }}
+    .legend-item {{ margin-bottom: 6px; line-height: 1.4; }}
 
     /* Badges Local / Cloud */
-    .badge {{
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 20px;
-        font-size: 0.75em;
-        font-weight: 700;
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 10px;
-    }}
+    .badge {{ display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }}
     .badge-local {{ background-color: {LOCAL_COLOR}; }}
     .badge-cloud {{ background-color: {CLOUD_COLOR}; }}
     .badge-inline {{ margin-bottom: 0; margin-right: 8px; }}
 
-    /* Design des Cartes d'application modernisées */
+    /* Design des Cartes d'application */
     .app-card {{
         background-color: {CARD_BG}; 
         border-radius: 16px;
@@ -111,188 +78,108 @@ st.markdown(f"""
         position: relative;
         z-index: 1;
     }}
-    .app-card:hover {{
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); 
-        z-index: 50;
-    }}
+    .app-card:hover {{ transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); z-index: 50; }}
     
-    /* Bordure supérieure de couleur au survol */
-    .app-card::before {{
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; height: 4px;
-        background: {EIFFAGE_RED};
-        border-radius: 16px 16px 0 0;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }}
+    .app-card::before {{ content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: {EIFFAGE_RED}; border-radius: 16px 16px 0 0; opacity: 0; transition: opacity 0.3s ease; }}
     .app-card:hover::before {{ opacity: 1; }}
 
-    /* En-tête de la carte */
-    .app-card-header {{
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 15px; 
-    }}
-
-    .app-card-header h2 {{
-        color: {EIFFAGE_BLACK}; 
-        font-size: 1.4em;
-        font-weight: 700;
-        margin: 0; 
-        line-height: 1.3;
-        padding-right: 15px;
-    }}
-    
-    .subtitle {{
-        font-size: 0.85em; 
-        color: {EIFFAGE_RED};
-        font-weight: 600;
-        text-transform: uppercase;
-        display: block;
-        margin-top: 5px;
-    }}
+    .app-card-header {{ display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }}
+    .app-card-header h2 {{ color: {EIFFAGE_BLACK}; font-size: 1.4em; font-weight: 700; margin: 0; line-height: 1.3; padding-right: 15px; }}
+    .subtitle {{ font-size: 0.85em; color: {EIFFAGE_RED}; font-weight: 600; text-transform: uppercase; display: block; margin-top: 5px; }}
 
     /* Icône d'information et Tooltip */
-    .info-container {{
-        position: relative;
-        display: inline-block;
-    }}
+    .info-container {{ position: relative; display: inline-block; }}
+    .info-icon {{ cursor: pointer; color: #A0A0A0; background-color: {BG_COLOR}; border-radius: 50%; min-width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1em; transition: all 0.2s ease; }}
+    .info-icon:hover {{ background-color: {EIFFAGE_BLACK}; color: white; }}
+    .tooltip-text {{ visibility: hidden; width: 300px; background-color: {EIFFAGE_BLACK}; color: #ffffff; text-align: left; border-radius: 12px; padding: 15px 20px; position: absolute; z-index: 9999; top: 135%; right: -10px; opacity: 0; transition: opacity 0.2s, top 0.2s; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-size: 0.9em; line-height: 1.5; font-weight: 400; }}
+    .info-container:hover .tooltip-text {{ visibility: visible; opacity: 1; top: 125%; }}
+    .tooltip-text::after {{ content: ""; position: absolute; bottom: 100%; right: 20px; margin-left: -5px; border-width: 6px; border-style: solid; border-color: transparent transparent {EIFFAGE_BLACK} transparent; }}
+    .tooltip-text ul, .tooltip-text ol {{ margin-top: 8px; margin-bottom: 10px; padding-left: 20px; }}
+    .tooltip-text a {{ color: #FF8E7D; text-decoration: none; font-weight: 600; }}
+    .tooltip-text a:hover {{ text-decoration: underline; }}
+    .app-card p.description {{ flex-grow: 1; font-size: 1em; color: {TEXT_COLOR}; line-height: 1.6; margin-bottom: 25px; opacity: 0.85; }}
 
-    .info-icon {{
+    /* Boutons d'action */
+    .app-button {{ display: flex; justify-content: center; align-items: center; padding: 14px 20px; background-color: {EIFFAGE_RED}; color: #ffffff !important; text-decoration: none; font-size: 1em; font-weight: 600; border-radius: 8px; transition: all 0.3s ease; width: 100%; border: none; }}
+    .app-button:hover {{ background-color: {EIFFAGE_BLACK}; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }}
+
+    /* Pied de page */
+    .footer-container {{ text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05); font-size: 0.9em; color: #777777; }}
+    .footer-container a {{ color: {EIFFAGE_RED}; text-decoration: none; font-weight: bold; }}
+    .footer-container a:hover {{ text-decoration: underline; }}
+    
+    /* === NOUVEAU : Bouton Flottant pour le Chat === */
+    .fab-chat-container {{
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        z-index: 1000;
         cursor: pointer;
-        color: #A0A0A0;
-        background-color: {BG_COLOR};
+    }}
+    .fab-chat-button {{
+        display: block;
+        width: 64px;
+        height: 64px;
+        background-color: {EIFFAGE_BLACK};
         border-radius: 50%;
-        min-width: 32px; 
-        height: 32px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         display: flex;
         justify-content: center;
         align-items: center;
-        font-weight: bold;
-        font-size: 1em;
-        transition: all 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }}
-
-    .info-icon:hover {{
+    .fab-chat-button:hover {{
+        transform: scale(1.1);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }}
+    .fab-chat-button img {{
+        width: 38px;
+        height: 38px;
+    }}
+    .fab-tooltip {{
+        visibility: hidden;
+        position: absolute;
+        bottom: 50%;
+        transform: translateY(50%);
+        right: 80px; 
         background-color: {EIFFAGE_BLACK};
         color: white;
-    }}
-
-    .tooltip-text {{
-        visibility: hidden;
-        width: 300px;
-        background-color: {EIFFAGE_BLACK};
-        color: #ffffff;
-        text-align: left;
-        border-radius: 12px;
-        padding: 15px 20px;
-        position: absolute;
-        z-index: 9999; 
-        top: 135%; 
-        right: -10px; 
+        padding: 8px 15px;
+        border-radius: 8px;
+        white-space: nowrap;
         opacity: 0;
-        transition: opacity 0.2s, bottom 0.2s;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        transition: opacity 0.2s ease, right 0.2s ease;
         font-size: 0.9em;
-        line-height: 1.5;
-        font-weight: 400;
+        font-weight: 500;
     }}
-
-    .info-container:hover .tooltip-text {{
+    .fab-chat-container a:hover .fab-tooltip {{
         visibility: visible;
         opacity: 1;
-        top: 125%; 
+        right: 90px;
     }}
-
-    .tooltip-text::after {{
-        content: "";
-        position: absolute;
-        bottom : 100%;
-        right: 20px;
-        margin-left: -5px;
-        border-width: 6px;
-        border-style: solid;
-        border-color: {EIFFAGE_BLACK} transparent transparent transparent;
-    }}
-
-    .tooltip-text ul, .tooltip-text ol {{
-        margin-top: 8px;
-        margin-bottom: 10px;
-        padding-left: 20px;
-    }}
-
-    .tooltip-text a {{
-        color: #FF8E7D;
-        text-decoration: none;
-        font-weight: 600;
-    }}
-    .tooltip-text a:hover {{ text-decoration: underline; }}
-
-    /* Texte de description de la carte */
-    .app-card p.description {{
-        flex-grow: 1; 
-        font-size: 1em;
-        color: {TEXT_COLOR};
-        line-height: 1.6;
-        margin-bottom: 25px;
-        opacity: 0.85;
-    }}
-
-    /* Boutons d'action modernisés */
-    .app-button {{
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-        padding: 14px 20px;
-        background-color: {EIFFAGE_RED}; 
-        color: #ffffff !important;
-        text-decoration: none;
-        font-size: 1em;
-        font-weight: 600;
-        border-radius: 8px;
-        transition: all 0.3s ease; 
-        width: 100%; 
-        border: none;
-    }}
-    .app-button:hover {{
-        background-color: {EIFFAGE_BLACK};
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }}
-
-    /* Pied de page */
-    .footer-container {{
-        text-align: center;
-        margin-top: 60px;
-        padding-top: 30px;
-        border-top: 1px solid rgba(0,0,0,0.05);
-        font-size: 0.9em;
-        color: #777777;
-    }}
-    .footer-container a {{
-        color: {EIFFAGE_RED};
-        text-decoration: none;
-        font-weight: bold;
-    }}
-    .footer-container a:hover {{ text-decoration: underline; }}
     </style>
 """, unsafe_allow_html=True)
 
-# 4. En-tête avec Logo, Titre et Légende d'accès
+# 4. Fonction pour encoder les images et gestion des en-têtes
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 
-image_filename = "Eiffage_Énergie_Systèmes.svg (2).png"
-
+# Logo Eiffage pour l'en-tête
 try:
-    img_base64 = get_base64_image(image_filename)
+    eiffage_logo_filename = "Eiffage_Énergie_Systèmes.svg (2).png"
+    img_base64 = get_base64_image(eiffage_logo_filename)
     img_tag = f'<img src="data:image/png;base64,{img_base64}" width="220" alt="Logo Eiffage">'
 except FileNotFoundError:
-    img_tag = f'<p style="color:{EIFFAGE_RED}; font-weight:bold;">⚠️ Image introuvable</p>'
+    img_tag = f'<p style="color:{EIFFAGE_RED}; font-weight:bold;">⚠️ Logo Eiffage introuvable</p>'
+
+# NOUVEAU : Logo pour le bouton de Chat
+try:
+    chat_logo_filename = "logo-chat.png"
+    chat_logo_base64 = get_base64_image(chat_logo_filename)
+    chat_logo_html = f'<img src="data:image/png;base64,{chat_logo_base64}" alt="Chat Eiffage">'
+except FileNotFoundError:
+    chat_logo_html = "💬" # Fallback en cas d'image non trouvée
 
 st.markdown(f"""
     <div class="header-container">
@@ -304,11 +191,11 @@ st.markdown(f"""
             <div class="legend-title">Informations d'accès</div>
             <div class="legend-item">
                 <span class="badge badge-local badge-inline">🔒 Local</span> 
-                Accessible uniquement sur le réseau Eiffage (bureau en Wi-Fi/câble ou VPN). Inaccessible en télétravail direct.
+                Accessible uniquement sur le réseau Eiffage (bureau ou VPN).
             </div>
             <div class="legend-item" style="margin-top: 10px;">
                 <span class="badge badge-cloud badge-inline">☁️ Cloud</span> 
-                Accessible de n'importe où, même depuis un ordinateur ou téléphone personnel.
+                Accessible de n'importe où (même en personnel).
             </div>
         </div>
     </div>
@@ -423,32 +310,18 @@ with col4:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_allow_html=True)
-
-# 7. NOUVELLE LIGNE : Chat Eiffage
-col5, = st.columns(1) # Utilise un seul élément dans le tuple pour une colonne unique
-
-with col5:
-    st.markdown(f"""
-    <div class="app-card">
-        <div class="app-card-header">
-            <div>
-                <span class="badge badge-cloud">☁️ Cloud</span>
-                <h2>Chat Eiffage <span class="subtitle">Assistant IA</span></h2>
+# 7. NOUVEAU : Injection du bouton flottant pour le Chat Eiffage
+st.markdown(f"""
+    <div class="fab-chat-container">
+        <a href="https://chat.dpg.eiffage.com/" target="_blank">
+            <span class="fab-tooltip">Accéder au Chat Eiffage</span>
+            <div class="fab-chat-button">
+                {chat_logo_html}
             </div>
-            <div class="info-container">
-                <div class="info-icon">?</div>
-                <div class="tooltip-text">
-                    <strong>Votre assistant intelligent chez Eiffage</strong><br><br>
-                    Le Chat Eiffage est une intelligence artificielle conçue pour vous aider dans vos tâches quotidiennes, répondre à vos questions et faciliter l'accès à l'information au sein du groupe.
-                    N'hésitez pas à lui poser toutes vos questions !
-                </div>
-            </div>
-        </div>
-        <p class="description">Accédez à votre assistant IA interne, un outil précieux pour obtenir des réponses rapides, rédiger des documents ou explorer de nouvelles solutions pour vos projets.</p>
-        <a href="https://chat.dpg.eiffage.com/" target="_blank" class="app-button">Accéder au Chat Eiffage</a>
+        </a>
     </div>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
+
 
 # 8. Pied de page
 st.markdown(f"""
