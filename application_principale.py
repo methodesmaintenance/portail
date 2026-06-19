@@ -112,7 +112,7 @@ st.markdown(f"""
     .fab-chat-container {{
         position: fixed;
         bottom: 40px;
-        right: 40px;
+        left: 40px;
         z-index: 1000;
         cursor: pointer;
     }}
@@ -141,7 +141,7 @@ st.markdown(f"""
         position: absolute;
         bottom: 50%;
         transform: translateY(50%);
-        right: 80px; 
+        left: 80px; 
         background-color: {EIFFAGE_BLACK};
         color: white;
         padding: 8px 15px;
@@ -155,7 +155,7 @@ st.markdown(f"""
     .fab-chat-container a:hover .fab-tooltip {{
         visibility: visible;
         opacity: 1;
-        right: 90px;
+        left: 90px;
     }}
     </style>
 """, unsafe_allow_html=True)
