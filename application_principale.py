@@ -195,7 +195,7 @@ st.markdown(f"""
             </div>
             <div class="legend-item" style="margin-top: 10px;">
                 <span class="badge badge-cloud badge-inline">☁️ Cloud</span> 
-                Accessible de n'importe où (même en personnel).
+                Accessible depuis n'importe où.
             </div>
         </div>
     </div>
